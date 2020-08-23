@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="crowdfunding-admin-reverse" />
+        <module name="crowdfunding-admin-component" />
+        <module name="crowdfunding-admin-util" />
+        <module name="crowdfunding-admin-entity" />
+        <module name="crowdfunding-admin-webui" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="crowdfunding" target="1.8" />
+      <module name="crowdfunding-admin-component" target="1.8" />
+      <module name="crowdfunding-admin-entity" target="1.8" />
+      <module name="crowdfunding-admin-parent" target="1.8" />
+      <module name="crowdfunding-admin-reverse" target="1.8" />
+      <module name="crowdfunding-admin-util" target="1.8" />
+      <module name="crowdfunding-admin-webui" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="crowdfunding" options="" />
+      <module name="crowdfunding-admin-component" options="-parameters" />
+      <module name="crowdfunding-admin-entity" options="-parameters" />
+      <module name="crowdfunding-admin-reverse" options="-parameters" />
+      <module name="crowdfunding-admin-util" options="-parameters" />
+      <module name="crowdfunding-admin-webui" options="-parameters" />
+    </option>
+  </component>
+</project>
