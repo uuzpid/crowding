@@ -35,15 +35,6 @@ public class TestHandler {
         return "success";
     }
 
-    @ResponseBody
-    @RequestMapping("/send/array/two.html")
-    public String testReceiveArrayTwo(ParamData paramData){
-        List<Integer> array = paramData.getArray();
-        for (Integer integer : array) {
-            System.out.println("number="+integer);
-        }
-        return "success";
-    }
 
     @ResponseBody
     @RequestMapping("/send/array/three.html")
@@ -54,14 +45,6 @@ public class TestHandler {
         return "success";
     }
 
-    @ResponseBody
-    @RequestMapping("/send/array/object.json")
-    public ResultEntity<Student> testReceiveComposeObject(@RequestBody Student student,HttpServletRequest request){
-        boolean judgeResult = CrowdUtil.judgeRequestType(request);
-        logger.info("judgeResult="+judgeResult);
-        logger.info(""+student);
-        return ResultEntity.successWithData(student);
-    }
 
     @RequestMapping("/test/ssm.html")
     public String testSsm(ModelMap modelMap, HttpServletRequest request){

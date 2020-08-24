@@ -1,5 +1,7 @@
 import com.pyx.crowd.entity.Admin;
+import com.pyx.crowd.entity.Role;
 import com.pyx.crowd.mapper.AdminMapper;
+import com.pyx.crowd.mapper.RoleMapper;
 import com.pyx.crowd.service.api.AdminService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +27,9 @@ public class CrowdTest {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private RoleMapper roleMapper;
 
     @Test
     public void testTx(){
@@ -64,6 +69,13 @@ public class CrowdTest {
     public void test2(){
         for(int i = 2;i<238;i++){
             adminMapper.insert(new Admin(null,"loginAcct"+i,"userPswd"+i,"userName"+i,"email"+i,null));
+        }
+    }
+
+    @Test
+    public void test3(){
+        for(int i = 1;i<235;i++){
+            roleMapper.insert(new Role(null,"roleName"+i));
         }
     }
 }
