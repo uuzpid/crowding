@@ -1,3 +1,28 @@
+﻿// 声明专门的函数显示确认模态框
+function showConfirmModal(roleArray) {
+
+	// 打开模态框
+	$("#confirmModal").modal("show");
+
+	// 清除旧的数据
+	$("#roleNameDiv").empty();
+
+	// 在全局变量范围创建数组用来存放角色id
+	window.roleIdArray = [];
+
+	// 遍历roleArray数组
+	for(var i = 0; i < roleArray.length; i++) {
+		var role = roleArray[i];
+		var roleName = role.roleName;
+		$("#roleNameDiv").append(roleName+"<br/>");
+
+		var roleId = role.roleId;
+
+		// 调用数组对象的push()方法存入新元素
+		window.roleIdArray.push(roleId);
+	}
+
+}
 // 执行分页，生成页面效果，任何时候调用这个函数都会重新加载页面
 function generatePage() {
 
@@ -117,7 +142,7 @@ function generateNavigator(pageInfo) {
 		"items_per_page": pageInfo.pageSize,
 		"current_page": pageInfo.pageNum - 1,
 		"prev_text": "上一页",
-		"next_text": "last"
+		"next_text": "下一页"
 	}
 
 	// 调用pagination()函数
@@ -132,6 +157,8 @@ function paginationCallBack(pageIndex, jQuery) {
 
 	// 调用分页函数
 	generatePage();
+
+	$("#summaryBox").prop("checked", window.checkedStatus);
 
 	// 取消页码超链接的默认行为
 	return false;

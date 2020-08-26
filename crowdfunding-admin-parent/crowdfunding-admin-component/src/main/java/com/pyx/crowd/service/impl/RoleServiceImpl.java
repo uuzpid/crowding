@@ -3,6 +3,7 @@ package com.pyx.crowd.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.pyx.crowd.entity.Role;
+import com.pyx.crowd.entity.RoleExample;
 import com.pyx.crowd.mapper.RoleMapper;
 import com.pyx.crowd.service.api.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,4 +39,18 @@ public class RoleServiceImpl implements RoleService {
     public void updateRole(Role role) {
         roleMapper.updateByPrimaryKey(role);
     }
+
+    @Override
+    public void removeRole(List<Integer> roleIdList) {
+
+        RoleExample example = new RoleExample();
+
+        RoleExample.Criteria criteria = example.createCriteria();
+
+        //delete from t_role where id in (5,8,12)
+        criteria.andIdIn(roleIdList);
+
+        roleMapper.deleteByExample(example);
+    }
+
 }

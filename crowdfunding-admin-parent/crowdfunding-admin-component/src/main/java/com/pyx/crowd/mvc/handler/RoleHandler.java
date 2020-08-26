@@ -6,15 +6,27 @@ import com.pyx.crowd.service.api.RoleService;
 import com.pyx.crowd.util.ResultEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 public class RoleHandler {
 
     @Autowired
     private RoleService roleService;
+
+    @ResponseBody
+    @RequestMapping("/role/remove/by/role/id/array.json")
+    public ResultEntity<String> removeByRoleIdAarry(@RequestBody List<Integer> roleIdList) {
+
+        roleService.removeRole(roleIdList);
+
+        return ResultEntity.successWithoutData();
+    }
 
     // 更新功能
     @ResponseBody

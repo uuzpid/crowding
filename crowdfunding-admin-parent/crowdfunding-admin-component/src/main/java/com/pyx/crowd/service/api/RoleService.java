@@ -12,4 +12,6 @@ public interface RoleService {
     void saveRole(Role role);
 
     void updateRole(Role role);
+
+    void removeRole(List<Integer> roleIdList);
 }
