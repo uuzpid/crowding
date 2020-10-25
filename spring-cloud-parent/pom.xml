@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.pyx</groupId>
+    <artifactId>spring-cloud-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>spring-cloud-common</module>
+        <module>spring-cloud-provider</module>
+        <module>spring-cloud-consumer</module>
+        <module>spring-cloud-eureka</module>
+        <module>spring-cloud-feign-consumer</module>
+        <module>spring-cloud-dashboard</module>
+        <module>spring-cloud-zuul</module>
+        <module>spring-cloud-gateway</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Hoxton.SR8</version>
+                <type>pom</type>
+                <!-- import依赖范围表示将spring-cloud-dependencies包中的依赖信息导入 -->
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <!-- 指定groupId和artifactId即可，版本已在父工程中定义 -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.3.3.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

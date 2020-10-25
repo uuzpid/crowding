@@ -5,21 +5,20 @@ import com.pyx.crowd.entity.Role;
 import com.pyx.crowd.service.api.RoleService;
 import com.pyx.crowd.util.ResultEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+//@Controller
+@RestController
 public class RoleHandler {
 
     @Autowired
     private RoleService roleService;
 
-    @ResponseBody
+    //@ResponseBody
     @RequestMapping("/role/remove/by/role/id/array.json")
     public ResultEntity<String> removeByRoleIdAarry(@RequestBody List<Integer> roleIdList) {
 
@@ -29,7 +28,7 @@ public class RoleHandler {
     }
 
     // 更新功能
-    @ResponseBody
+    //@ResponseBody
     @RequestMapping("/role/update.json")
     public ResultEntity<String> updateRole(Role role){
         roleService.updateRole(role);
@@ -37,7 +36,7 @@ public class RoleHandler {
     }
 
     // 新增功能
-    @ResponseBody
+    //@ResponseBody
     @RequestMapping("/role/save.json")
     public ResultEntity<String> saveRole(Role role){
 
@@ -46,7 +45,9 @@ public class RoleHandler {
     }
 
     // 点击用户维护按钮 跳转的页面
-    @ResponseBody
+    //@ResponseBody
+    // SpringSecurity权限加锁
+    @PreAuthorize("hasRole('部长')")
     @RequestMapping("/role/get/page/info.json")
     public ResultEntity<PageInfo<Role>> getPageInfo(
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,

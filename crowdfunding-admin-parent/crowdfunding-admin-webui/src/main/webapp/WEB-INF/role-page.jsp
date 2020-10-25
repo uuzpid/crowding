@@ -5,6 +5,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/pagination.css" />
 <script type="text/javascript" src="jquery/jquery.pagination.js"></script>
+<link rel="stylesheet" href="ztree/zTreeStyle.css"/>
+<script type="text/javascript" src="ztree/jquery.ztree.all-3.5.min.js"></script>
 <script type="text/javascript" src="crowd/my-role.js" charset="UTF-8"></script>
 <script type="text/javascript">
 	$(function(){
@@ -258,6 +260,62 @@
 			showConfirmModal(roleArray);
 
 		});
+
+		// 13.给分配权限按钮绑定单机响应函数
+		$("#rolePageBody").on("click",".checkBtn",function(){
+
+			// 把当前角色id存入全局变量
+			window.roleId = this.id;
+
+			// 打开模态框
+			$("#assignModal").modal("show");
+
+			// 在模态框中装载Auth的树形结构数据
+			fillAuthTree();
+		});
+
+		// 14.给分配权限模态框中"分配"按钮绑定单机响应函数
+		$("#assignBtn").click(function () {
+			// 收集树形结构的各个节点中被勾选的节点
+			var authIdArray = [];
+			// 获取zTreeObj对象
+			let zTreeObj = $.fn.zTree.getZTreeObj("authTreeDemo");
+			// 获取被勾选的节点 参数默认是true
+			let checkedNodes = zTreeObj.getCheckedNodes();
+			for(var i = 0 ;i<checkedNodes.length;i++){
+				var checkedNode = checkedNodes[i];
+				var authId = checkedNode.id;
+				authIdArray.push(authId);
+			}
+
+			// 发送请求执行分配
+			var requestBody ={
+				"authIdArray":authIdArray,
+				"roleId":[window.roleId]
+			};
+
+			requestBody = JSON.stringify(requestBody);
+			$.ajax({
+				"url":"assign/do/role/assign/auth.json",
+				"type":"post",
+				"data":requestBody,
+				"contentType":"application/json;charset=UTF-8",
+				"dataType":"json",
+				"success":function (response) {
+					var result = response.result;
+					if(result=="SUCCESS"){
+						layer.msg("操作成功!")
+					}
+					if(result=="FAILED"){
+						layer.msg("操作失败！"+response.message);
+					}
+				},
+				"error":function (response) {
+					layer.msg(response.status+""+response.statusText);
+				}
+			});
+			$("#assignModal").modal("hide");
+		});
 	});
 </script>
 <body>
@@ -328,5 +386,6 @@
 	<%@ include file="/WEB-INF/modal-role-add.jsp" %>
 	<%@ include file="/WEB-INF/modal-role-edit.jsp" %>
 	<%@ include file="/WEB-INF/modal-role-confirm.jsp" %>
+	<%@ include file="/WEB-INF/modal-role-assign-auth.jsp" %>
 </body>
 </html>

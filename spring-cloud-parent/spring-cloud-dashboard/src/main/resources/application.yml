@@ -1,0 +1,16 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: Dashboard
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:5000/eureka
+
+
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "*"

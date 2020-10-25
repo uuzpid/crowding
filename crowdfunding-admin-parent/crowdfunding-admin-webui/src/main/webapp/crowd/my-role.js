@@ -1,4 +1,83 @@
-﻿// 声明专门的函数显示确认模态框
+﻿// 在模态框中显示树形结构
+function fillAuthTree() {
+
+	// 1.发送AJAX请求查询Auth数据
+	var ajaxReturn = $.ajax({
+		"url":"assgin/get/all/auth.json",
+		"type":"post",
+		"dataType":"json",
+		"async":false
+	});
+
+	if(ajaxReturn.status!=200){
+		layer.msg("请求处理出错,响应码是:"+ajaxReturn.status+"说明是:"+ajaxReturn.statusText)
+		return ;
+	}
+
+
+	// 2.从响应结果中获取Auth的JSON数据
+	// 从服务器端查询到的list不需要组装成树形结构，这里我们交给Ztree去组装
+	var authList = ajaxReturn.responseJSON.data;
+
+	// 3.准备对Ztree进行设置的JSON对象
+	var setting = {
+		"data": {
+			"simpleData": {
+				"enable": true,
+				// 使用categoryId字段显示节点名称，不用默认的id字段
+				"pIdKey": "categoryId"
+			},
+			"key":{
+				// 使用title字段显示节点名称，不用默认的name字段
+				"name": "title"
+			},
+		},
+		"check":{
+			"enable": true
+		}
+	};
+	// 4.生成树形结构
+	$.fn.zTree.init($("#authTreeDemo"),setting,authList)
+
+	// 调用zTreeObj对象的方法，把节点设置为默认展开
+	let zTreeObj = $.fn.zTree.getZTreeObj("authTreeDemo");
+	zTreeObj.expandAll(true)
+
+	// 5.查询已分配的Auth的id组成的数组
+	ajaxReturn = $.ajax({
+		"url": "assign/get/assigned/auth/id/by/role/id.json",
+		"type": "post",
+		"data":{
+			"roleId": window.roleId,
+		},
+		"dataType": "json",
+		"async": false,
+	})
+
+	if(ajaxReturn.status!=200){
+		layer.msg("请求处理出错,响应码是:"+ajaxReturn.status+"说明是:"+ajaxReturn.statusText)
+		return ;
+	}
+
+	// 从响应结果中获取authIdArray
+	var authIdArray = ajaxReturn.responseJSON.data;
+
+
+	// 6.根据authIdArray把树形结构中对应的节点勾选上
+	// 遍历authIdArray数组
+	for(var i = 0;i<authIdArray.length;i++){
+		var authId = authIdArray[i];
+		// 根据id查询树形结构中对应的节点
+		var treeNode = zTreeObj.getNodeByParam("id",authId);
+		// 将treeNode设置为被勾选
+		// checked设置为true 表示勾选节点
+		// checkTypeFlag设置为false 取消子父节点勾选联动
+		zTreeObj.checkNode(treeNode,true,false);
+	};
+
+}
+
+// 声明专门的函数显示确认模态框
 function showConfirmModal(roleArray) {
 
 	// 打开模态框
@@ -109,7 +188,7 @@ function fillTableBody(pageInfo) {
 		var checkboxTd = "<td><input id='"+roleId+"' class='itemBox' type='checkbox'></td>";
 		var roleNameTd = "<td>"+roleName+"</td>";
 
-		var checkBtn = "<button type='button' class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check'></i></button>";
+		var checkBtn = "<button id='"+roleId+"' type='button' class='btn btn-success btn-xs checkBtn'><i class=' glyphicon glyphicon-check'></i></button>";
 
 		// 通过button标签的id属性（别的属性其实也可以）把roleId值传递到button按钮的单击响应函数中，在单击响应函数中使用this.id
 		var pencilBtn = "<button id='"+roleId+"' type='button' class='btn btn-primary btn-xs pencilBtn'><i class=' glyphicon glyphicon-pencil'></i></button>";

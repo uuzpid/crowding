@@ -12,8 +12,25 @@ import java.util.List;
 @Service
 public class MenuServiceImpl implements MenuService {
 
+
+
     @Autowired
     private MenuMapper menuMapper;
+
+    @Override
+    public void removeMenu(Integer id) {
+        menuMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void updateMenu(Menu menu) {
+        menuMapper.updateByPrimaryKeySelective(menu);
+    }
+
+    @Override
+    public void saveMenu(Menu menu) {
+        menuMapper.insert(menu);
+    }
 
     @Override
     public List<Menu> getAll() {

@@ -41,17 +41,17 @@
     <mvc:view-controller path="/menu/to/page.html" view-name="menu-page"/>
 
 
-    <!--注册拦截器-->
+    <!--注册拦截器 使用springsecurity后自定义的拦截器不再使用
     <mvc:interceptors>
         <mvc:interceptor>
-            <!--选择要拦截的请求
-                 /*对应一层路径 /**对应多层路径 /abc/abc-->
+            &lt;!&ndash;选择要拦截的请求
+                 /*对应一层路径 /**对应多层路径 /abc/abc&ndash;&gt;
             <mvc:mapping path="/**"/>
-            <!--选择不拦截的请求-->
+            &lt;!&ndash;选择不拦截的请求&ndash;&gt;
             <mvc:exclude-mapping path="/admin/to/login/page.html"/>
             <mvc:exclude-mapping path="/admin/do/login.html"/>
             <mvc:exclude-mapping path="/admin/do/logout.html"/>
             <bean class="com.pyx.crowd.mvc.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors>
+    </mvc:interceptors>-->
 </beans>

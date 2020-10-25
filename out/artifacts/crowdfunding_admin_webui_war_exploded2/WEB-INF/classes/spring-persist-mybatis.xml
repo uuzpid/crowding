@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:p="http://www.springframework.org/schema/context"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-4.3.xsd ">
+
     <!--加载外部属性文件-->
     <context:property-placeholder location="classpath:jdbc.properties" />
 
@@ -26,6 +26,23 @@
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <!-- 指定 Mapper 配置文件位置 -->
         <property name="mapperLocations" value="classpath:mybatis/mapper/*Mapper.xml"/>
+
+        <!--配置pagehelper插件-->
+        <property name="plugins">
+             <array>
+                 <!--配置PageHelper插件-->
+                 <bean class="com.github.pagehelper.PageHelper">
+                     <property name="properties">
+                         <props>
+                             <!--配置数据库方言，告诉PageHelper当前使用的数据库-->
+                             <prop key="dialect">mysql</prop>
+                             <!--配置页码的合理化修正，在1~总页数之间修正页码-->
+                             <prop key="reasonable">true</prop>
+                         </props>
+                     </property>
+                 </bean>
+             </array>
+        </property>
     </bean>
 
     <!-- 配置 MapperScannerConfigurer -->

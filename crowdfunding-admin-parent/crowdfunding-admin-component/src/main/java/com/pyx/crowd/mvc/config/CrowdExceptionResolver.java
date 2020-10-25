@@ -23,31 +23,32 @@ public class CrowdExceptionResolver {
 
     @ExceptionHandler(value = LoginAcctAlreadyInUseForUpdateException.class)
     public ModelAndView resolveLoginAcctAlreadyInUseForUpdateException(LoginAcctAlreadyInUseForUpdateException exception,
-                                                              HttpServletRequest request,
-                                                              HttpServletResponse response) throws IOException {
+                                                                       HttpServletRequest request,
+                                                                       HttpServletResponse response) throws IOException {
         String viewName = "system-error";
 
-        return commonResolve(viewName,exception,request,response);
+        return commonResolve(viewName, exception, request, response);
     }
+
     /**
      * 捕获违反表唯一约束的异常
      */
     @ExceptionHandler(value = LoginAcctAlreadyInUseException.class)
     public ModelAndView resolveLoginAcctAlreadyInUseException(LoginAcctAlreadyInUseException exception,
-                                                        HttpServletRequest request,
-                                                        HttpServletResponse response) throws IOException {
+                                                              HttpServletRequest request,
+                                                              HttpServletResponse response) throws IOException {
         String viewName = "admin-add";
 
-        return commonResolve(viewName,exception,request,response);
+        return commonResolve(viewName, exception, request, response);
     }
 
-    @ExceptionHandler(value = AccessForbiddenException.class)
-    public ModelAndView resolveAccessForbiddenException(AccessForbiddenException exception,
-                                                        HttpServletRequest request,
-                                                        HttpServletResponse response) throws IOException {
+    @ExceptionHandler(value = Exception.class)
+    public ModelAndView resolveException(Exception exception,
+                                         HttpServletRequest request,
+                                         HttpServletResponse response) throws IOException {
         String viewName = "admin-login";
 
-        return commonResolve(viewName,exception,request,response);
+        return commonResolve(viewName, exception, request, response);
     }
 
     /**
@@ -55,12 +56,12 @@ public class CrowdExceptionResolver {
      */
     @ExceptionHandler(value = LoginFailedException.class)
     public ModelAndView resolveLoginFailedException(LoginFailedException exception,
-                                             HttpServletRequest request,
-                                             HttpServletResponse response) throws IOException {
+                                                    HttpServletRequest request,
+                                                    HttpServletResponse response) throws IOException {
         // 登录失败后 希望用户回到登录页面
         String viewName = "admin-login";
 
-        return commonResolve(viewName,exception,request,response);
+        return commonResolve(viewName, exception, request, response);
     }
 
     @ExceptionHandler(value = ArithmeticException.class)
@@ -69,7 +70,7 @@ public class CrowdExceptionResolver {
                                              HttpServletResponse response) throws IOException {
         String viewName = "system-error";
 
-        return commonResolve(viewName,exception,request,response);//返回到system-error页面
+        return commonResolve(viewName, exception, request, response);//返回到system-error页面
     }
 
     //@ExceptionHandler 将一个具体的异常类型和一个方法关联起来
@@ -79,7 +80,7 @@ public class CrowdExceptionResolver {
                                                     HttpServletResponse response) throws Exception {//当前响应对象
         String viewName = "system-error";
 
-        return commonResolve(viewName,exception,request,response);//返回到system-error页面
+        return commonResolve(viewName, exception, request, response);//返回到system-error页面
     }
 
     private ModelAndView commonResolve(String viewName,
@@ -89,7 +90,7 @@ public class CrowdExceptionResolver {
         boolean judgeResult = CrowdUtil.judgeRequestType(request);
 
         //如果是ajax请求
-        if(judgeResult){
+        if (judgeResult) {
             //创建一个ResultEntity对象
             ResultEntity<Object> resultEntity = ResultEntity.failed(exception.getMessage());
             //创建Gson对象
@@ -104,7 +105,7 @@ public class CrowdExceptionResolver {
         //如果不是ajax请求，则创建ModelAndView对象
         ModelAndView modelAndView = new ModelAndView();
         //将Exception对象存入模型
-        modelAndView.addObject(CrowdConstant.ATTR_NAME_EXCEPTION,exception);
+        modelAndView.addObject(CrowdConstant.ATTR_NAME_EXCEPTION, exception);
         //设置对应的视图名称
         modelAndView.setViewName(viewName);
         return modelAndView;

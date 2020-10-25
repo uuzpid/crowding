@@ -1,0 +1,17 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: zuul-gateway
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:5000/eureka/
+zuul:
+  routes:
+    employee:
+      path: /zuul/**
+      service-id: feignconsumer
+  servlet-path: /

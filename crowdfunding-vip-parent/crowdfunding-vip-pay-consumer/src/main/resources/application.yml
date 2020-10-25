@@ -1,0 +1,30 @@
+ali:
+  pay:
+    alipay-public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxssnnHAMTf8pVw3fI5cmYU/UW8XrhlNX8+j9s77KLWi/1EbcZWQUdikm6OikqccCl6FkF6y2gf+DYIRqKJCQ0MFJr1eEqO6gpRcJxFajCh/g4NEcHiC6AF4c6rh780YUVv0zfrZTGTg3zEPwRXx1Fxp/n/oM39NE6fHLbjHYR590yVfBGH/HJTMU+cejAhwgtJKgawggQVvTLMzN3q/ig+Rp5syNybmCPth3unH+J2TSHFKorACejku1EIBR4JNqJWpaSlyu294LCVssnlLGOmlXAfx6ZGfiitcnEaQGgqNNYDyU7Qz8NY/dKs1AonP0V9xM5P9DgYgFyE8Sdjz6/wIDAQAB
+    app-id: 2016102600764538
+    merchant-private-key: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDjhTD36tRoQrk9W83G5ZBpwajwdB5SdPBNiLsHe4ySv+D9YNF+pbtBOzWbCGbzBj5Z/NBWIGIRJlxjflBHNqImBU9mchKJZQnMfdYkUBx7xruaEIxVWtmlAuQjgxcWV+V2tX17zIYL+DaKFsBFKYGd4kmS9t9N3TzeT6ZLQqXKYFe/LOAWJn370ELLdb7tmAwj2VchHNHW6weU9YF8mGUsd8IKBDUeiKsf47a1Jd8BLuOqvnMpLSd1DAIOhwBF54ygh3VqjRluTayeqpulLql1Buzjew0lJkQct/aYepoBRk+t26vTF2oP8qGd/ltJOFuGD1aUFr+dS4r6bkH43TbZAgMBAAECggEARjh+c5Xrtr4ZNAHYkfGaT7mwrX35OdPTsupnZxjPux8zjqBKKD94etqOYeoG9CzSI63ukxZtjgN78k0y87e99eQfrGu6ouMnUhDofc6n69/bWOKQnWtrzw0EYp18C65XKPs83m+yU5FpK9d3wiDcW2FS+ePt6bdFqQuGNKY+SyY6FNy6JS65Z2+d5nI5kYPnYu+tJnj2en0VbFAlGGCRzxRGwuYrhSF7/dhTy20iNqd/MtkEkYXLaim0ZEVQzq07hlQKPIFpM2BuydnC5H/46vGnQ+PbF6+omwDG0NP8PAac905iF/VvLRJv/XLdbkxC8+20EpKvAMqm36ahsvENgQKBgQDyknrS/bIYe3s97ee8kP4oWgvxcZwoh22ST1jggVOu/ueOcEyT7lq3/EKvniDaMUm8kFLR0ZgJDUmwsHDl1M5KZAp8gmPUnFFhWvouJjl6Z0g4cO+2JsZPV3I4QdF//HZ3tZS2a2axvoPVoyi1YdHUMxO2JKMU0rxtpkYZrQSeSQKBgQDwHWi4XMZ6aFXc26EewNIfintYUY2ViRt5R2oct07cE1aXhSbPdL0nojBAY2oL3UbMYMy2Ox0f7LMpQoZGiV9/ufTB67jb3SPxutQ/mcc8aD5HOpoIuEy9d3TT0kPWXtaj49UvhMfUKxbFZmPbORnkJ/SnLX1xdvFh+RNLmakUEQKBgQDm6cAYaD8IhUvNqVKns9LuMMIbxo3kGv+YfwZZOWOjO67MbmTHkeg0KuSEb2BQtQi/gxgD+qTjQQ38MApZD1qNgGxnGGzWMTRbHBL6qZKfzf/3ErNuz7yKPPFTUnyPfJJ95JI7kUQCQh0X2yjeec8YVMMX6gqAwRd0vgsPWCAEWQKBgQC8/XjSO3uhFwQV/Ox5Jy170+S3pCD7hNoSACq+BW3VfIcYZZ4hhXHogxjVZSovwm+aJ8qY2DhZS1XM8OZ9GF0JTFUgWSe8Lfe/qNysXp5Zpnb2W2Kn4F/OdPqISqRIU4c/ofDHIQyjq3KV1rxb7Tq6wNQozX5B02u0QHZ2d7CD8QKBgEqTPnjW63Vvy7yjSLDiUrZn3U6HCfKqh5PxkeqMDfO12Cb3b9X2j8ICCbqQBHjyB/fZsYu20anHH9d6g2AMs9rfyblqQaPGMj35KpkAWY82gDV/OExFUkbt3x3eMX3gKoDso8hd3QDAnbJj+U0BML0J8NONm0fSfh95itC167HP
+    charset: utf-8
+    gateway-url: https://openapi.alipaydev.com/gateway.do
+    sign-type: RSA2
+    notify-url: http://52dhrq.natappfree.cc/pay/notify #支付宝服务器调用我们的服务 必须要经过隧道
+    return-url: http://localhost/pay/return #支付完成后跳转的页面 可以不经过隧道
+
+
+server:
+  port: 7000
+spring:
+  application:
+    name: crowd-pay
+  redis:
+    host: 192.168.88.132
+    password: 123456
+  session:
+    store-type: redis
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka

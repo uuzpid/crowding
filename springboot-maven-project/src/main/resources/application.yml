@@ -1,0 +1,48 @@
+#logging:
+# level:
+#   root: debug
+student:
+  stu-id: 5
+  stu-name: jerry
+  graduated: false
+  subject:
+    - java
+    - php
+    - mysql
+  birthday: 1990/10/15
+  teachers:
+    java: Tom
+    php: Bob
+    mysql: Tony
+  address:
+    province: 广东
+    city: 深圳
+    street: 宝安大道
+
+pyx:
+  config:
+    message: can
+
+# mybatis整合
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/springboot?serverTimezone=UTC
+    username: root
+    password: 55869
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    name: mydb
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: localhost
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+mybatis:
+  mapper-locations: classpath*:/mybatis/mapper/*Mapper.xml
+logging:
+  level:
+    com.pyx.mapper: debug
+#server:
+#  servlet:
+#    context-path: /abc

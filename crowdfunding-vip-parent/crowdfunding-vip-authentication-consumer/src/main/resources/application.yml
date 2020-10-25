@@ -1,0 +1,31 @@
+server:
+  port: 4000
+spring:
+  application:
+    name: crowd-auth
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+  redis:
+    host: 192.168.88.132
+    password: 123456
+  session:
+    store-type: redis
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka
+
+short:
+  message:
+    app-code: 75d21d877e6740e4a1b6ca3fd843c2b7
+    path: /smsApi/verifyCode/send
+    host: https://aliapi.market.alicloudapi.com
+    template-id: 540
+    method: POST
+
+# 解决微服务超时问题 第一次连接redis时会创立连接。耗时过长，如果不设置这个会直接报错500
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000

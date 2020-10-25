@@ -22,4 +22,36 @@
         <property name="prefix" value="/WEB-INF/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
+    <!--配置基于xml的异常映射-->
+    <bean id="simpleMappingExceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">system-error</prop>
+                <prop key="com.pyx.crowd.exception.AccessForbiddenException">admin-login</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--配置view-controller 直接把请求地址和视图名称关联起来，不必写controller-->
+    <mvc:view-controller path="/admin/to/login/page.html" view-name="admin-login"></mvc:view-controller>
+    <mvc:view-controller path="/admin/to/main/page.html" view-name="admin-main"></mvc:view-controller>
+    <mvc:view-controller path="/admin/to/add/page.html" view-name="admin-add"></mvc:view-controller>
+    <mvc:view-controller path="/role/to/page.html" view-name="role-page"/>
+    <mvc:view-controller path="/menu/to/page.html" view-name="menu-page"/>
+
+
+    <!--注册拦截器 使用springsecurity后自定义的拦截器不再使用
+    <mvc:interceptors>
+        <mvc:interceptor>
+            &lt;!&ndash;选择要拦截的请求
+                 /*对应一层路径 /**对应多层路径 /abc/abc&ndash;&gt;
+            <mvc:mapping path="/**"/>
+            &lt;!&ndash;选择不拦截的请求&ndash;&gt;
+            <mvc:exclude-mapping path="/admin/to/login/page.html"/>
+            <mvc:exclude-mapping path="/admin/do/login.html"/>
+            <mvc:exclude-mapping path="/admin/do/logout.html"/>
+            <bean class="com.pyx.crowd.mvc.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>-->
 </beans>

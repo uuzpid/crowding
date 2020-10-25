@@ -5,6 +5,7 @@ import com.pyx.crowd.constant.CrowdConstant;
 import com.pyx.crowd.entity.Admin;
 import com.pyx.crowd.service.api.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,6 +42,7 @@ public class AdminHandler {
     /**
      * 添加数据
      */
+    @PreAuthorize("hasAuthority('user:save')")
     @RequestMapping("/admin/save.html")
     public String save(Admin admin){
         adminService.saveAdmin(admin);
@@ -86,7 +88,7 @@ public class AdminHandler {
     }
 
     /**
-     * 登录用户请求
+     * 登录用户请求 此方法已作废
      */
     @RequestMapping("/admin/do/login.html")
     public String doLogin(@RequestParam("loginAcct")String loginAcct,

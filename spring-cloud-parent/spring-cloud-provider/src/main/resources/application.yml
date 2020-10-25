@@ -1,0 +1,13 @@
+server:
+  port: 1000
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:5000/eureka
+spring:
+  application:
+    name: provider1 #设置微服务的名字
+
+

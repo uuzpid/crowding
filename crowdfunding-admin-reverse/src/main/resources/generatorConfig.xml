@@ -43,7 +43,10 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="t_menu" domainObjectName="Menu" ></table>
+        <table tableName="t_order" domainObjectName="OrderPO" ></table>
+        <table tableName="t_address" domainObjectName="AddressPO" ></table>
+        <table tableName="t_order_project" domainObjectName="OrderProjectPO" ></table>
+
 
     </context>
 </generatorConfiguration>

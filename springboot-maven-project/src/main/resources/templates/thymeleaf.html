@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style type="text/css">
+    div {
+        width: 300px;
+        height: 300px;
+        border: 1px solid black;
+    }
+</style>
+<body>
+    <p th:text="666666">125468</p>
+    <input type="text" value="5555" th:value="666" />
+    <div style="background-color: green" th:style="'background-color: yellow'" ></div>
+    <img src="../static/123123.png" th:src="@{../templates/QQ图片20200515022811.jpg}">
+    <h3>访问请求域</h3>
+    <p th:text="${attrNameRequestScope }"></p>
+    <p th:text="${#httpServletRequest.getAttribute('attrNameRequestScope') }"></p>
+    <h3>访问session</h3>
+    <p th:text="${session.attrNameSessionScope}"></p>
+    <h3>访问应用域</h3>
+    <p th:text="${application.attrNameAppScope}"></p>
+    <h3>获取contextPath值</h3>
+    <!--@{}是把contextPath的值放到后面的地址前-->
+    <p th:text="@{/aaa/bbb/ccc}"></p>
+    <!--直接执行表达式-->
+    <!--<p style='color:blue;font-size:100px;'>attrValueRequestScope-->
+    <p>[[${attrNameRequestScope}]]</p>
+    <!--这个会显示标签样式-->
+    <p>[(${attrNameRequestScope})]</p>
+
+    <h3>测试if判断</h3>
+    <p th:if="${not #strings.isEmpty(attrNameRequestScope)}">不为空显示该内容</p>
+    ~<p th:if="${#strings.isEmpty(attrNameRequestScope)}">为空显示该内容</p>~
+
+    <p th:each="one : ${list}" th:text="${one}"></p>
+
+    <h3>包含页面片段</h3>
+    <!--左边的值拼前后缀后必须找到要包含的文件::右边是代码片段的名称-->
+    <div th:insert="~{include/part::myFirstPart}"></div>
+    <div th:replace="~{include/part::mySecondPart}"></div>
+    <div th:include="~{include/part::myThirdPart}"></div>
+</body>
+</html>

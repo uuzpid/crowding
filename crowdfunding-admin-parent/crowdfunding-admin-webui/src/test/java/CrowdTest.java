@@ -1,3 +1,4 @@
+/*
 import com.pyx.crowd.entity.Admin;
 import com.pyx.crowd.entity.Role;
 import com.pyx.crowd.mapper.AdminMapper;
@@ -80,3 +81,4 @@ public class CrowdTest {
     }
 }
 
+*/
